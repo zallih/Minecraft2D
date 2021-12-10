@@ -37,7 +37,11 @@ Minecraft é um dos maiores jogos da última década. O fenômeno independente t
   <h3>Controles:</h3>
   
   A - Esquerda
+  
+  
   D - Direita
+  
+  
   Espaço - Pular
   
 </div>
