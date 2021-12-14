@@ -44,6 +44,8 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	
 	public static Inventory inventory;
 	
+	
+	
 	public static int currentEnemy = 0;
 
 	public UI ui;
@@ -60,7 +62,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		spritesheet = new Spritesheet("/spritesheet.png");
 		entities = new ArrayList<Entity>();
 		enemies = new ArrayList<Enemy>();
-		player = new Player(WIDTH / 2 - 30, HEIGHT / 2, 16, 16, 2, spritesheet.getSprite(0, 0, 16, 16));
+		player = new Player(WIDTH / 2 - 30, HEIGHT / 2, 16, 16, 1, spritesheet.getSprite(0, 0, 16, 16));
 		world = new World("/level1.png");
 		ui = new UI();
 		inventory = new Inventory();
@@ -104,7 +106,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			Entity e = entities.get(i);
 			e.tick();
 		}
-		
+		ui.tick();
 		inventory.tick();
 		
 	}
@@ -220,6 +222,16 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		
+		
+		if(e.getButton() == MouseEvent.BUTTON1) {
+			inventory.isPressed = true;
+		}else if(e.getButton() == MouseEvent.BUTTON3) {
+			inventory.isPlaceItem = true;
+		}
+		
+		inventory.mx = e.getX();
+		inventory.my = e.getY();
 	}
 
 	@Override

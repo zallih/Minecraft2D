@@ -49,7 +49,6 @@ public class Player extends Entity {
 	}
 
 	public void tick() {
-
 		depth = 2;
 
 		Camera.x = Camera.clamp(this.getX() - Game.WIDTH / 2, 0, World.WIDTH * 16 - Game.WIDTH);
@@ -107,6 +106,11 @@ public class Player extends Entity {
 				jump = false;
 				jumpFrames = 0;
 			}
+		}
+		
+		if(life<=0) {
+			life = 0;
+			World.restartGame();
 		}
 
 	}

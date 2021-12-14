@@ -2,6 +2,7 @@ package com.ltztec.world;
 
 import java.awt.Graphics;
 
+import com.ltztec.entities.Entity;
 import com.ltztec.main.Game;
 
 public class World {
@@ -11,16 +12,33 @@ public class World {
 	public static final int TILE_SIZE = 16;
 
 	public World(String path) {
-		
-		WIDTH = Game.WIDTH / 16;
-		HEIGHT = Game.HEIGHT / 16;
-		tiles = new Tile[WIDTH*HEIGHT];
-		for(int xx = 0; xx < WIDTH; xx++) {
-			for(int yy = 0; yy < HEIGHT; yy++) {
-				if(yy == (Game.HEIGHT/16) - 1) {
-					tiles[xx+yy*WIDTH] = new WallTile(xx*16,yy*16,Tile.TILE_GRAMA);
-				}else {
-					tiles[xx+yy*WIDTH] = new FloorTile(xx*16,yy*16,Tile.TILE_CEU);
+
+		WIDTH = 200;
+		HEIGHT = 80;
+		tiles = new Tile[WIDTH * HEIGHT];
+		for (int xx = 0; xx < WIDTH; xx++) {
+			int initialHeight = Entity.rand.nextInt(12 - 8) + 8;
+			for (int yy = 0; yy < HEIGHT; yy++) {
+				if (yy == HEIGHT - 1 || xx == WIDTH - 1 || xx == 0 || yy == 0) {
+					tiles[xx + yy * WIDTH] = new WallTile(xx * 16, yy * 16, Tile.SOLID);
+					tiles[xx + yy * WIDTH].solid = true;
+				} else {
+					if (yy > initialHeight) {
+
+						if (xx < 80) {
+							tiles[xx + yy * WIDTH] = new WallTile(xx * 16, yy * 16, Tile.TILE_GRAMA);
+						}else if (xx < 130) {
+							tiles[xx + yy * WIDTH] = new WallTile(xx * 16, yy * 16, Tile.TILE_TERRA);
+						}else if (xx < 150) {
+							tiles[xx + yy * WIDTH] = new WallTile(xx * 16, yy * 16, Tile.TILE_PEDRA);
+						}else {
+							tiles[xx + yy * WIDTH] = new WallTile(xx * 16, yy * 16, Tile.TILE_AREIA);
+						}
+						
+					} else {
+
+						tiles[xx + yy * WIDTH] = new FloorTile(xx * 16, yy * 16, Tile.TILE_CEU);
+					}
 				}
 			}
 		}
@@ -47,7 +65,6 @@ public class World {
 	}
 
 	public static void restartGame() {
-		// TODO: Aplicar m�todo para reiniciar o jogo corretamente.
 		System.exit(2);
 		return;
 	}
