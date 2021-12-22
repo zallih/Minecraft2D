@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 
 import com.ltztec.main.Game;
 import com.ltztec.main.Sound;
-import com.ltztec.world.Camera;
 import com.ltztec.world.World;
 
 public class Enemy extends Entity {
@@ -16,8 +15,10 @@ public class Enemy extends Entity {
 	public boolean right = true, left = false;;
 
 	private int maskx = 2, masky = 2, maskw = 16, maskh = 16;
-	public static int frames = 0, maxFrames = 30, index = 0, maxIndex = 1;
-	public static BufferedImage[] sprites;
+	public static int frames = 0, maxFrames = 8, index = 0, maxIndex = 3;
+	public static BufferedImage[] enemyLeft;
+	public static BufferedImage[] enemyRight;
+	
 
 	private double gravity = 1.2;
 
@@ -27,21 +28,27 @@ public class Enemy extends Entity {
 
 
 
-	public Enemy(double x, double y, int width, int height, double speed, BufferedImage sprite) {
-		super(x, y, width, height, speed, sprite);
+	public Enemy(double x, double y, int width, int height, double speed) {
+        super(x, y, width, height, speed, null);
 
-		sprites = new BufferedImage[2];
-		sprites[0] = Game.spritesheet.getSprite(32, 32, 16, 16);
-		sprites[1] = Game.spritesheet.getSprite(48, 32, 16, 16);
-		
-		for (int i = 0; i < 2; i++) {
-			sprites[i] = Game.spritesheet.getSprite(32 + (i * 16), 32, 16, 16);
-		}
-		
-	}
+        enemyLeft = new BufferedImage[4];
+        enemyRight = new BufferedImage[4];
+
+        for (int i = 0; i < 4; i++) {
+            enemyLeft[i] = Game.spritesheet.getSprite(32 + (i * 16), 32, 16, 16);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            enemyRight[i] = Game.spritesheet.getSprite(32 + (i * 16), 32, 16, 16);
+        }
+
+}
 
 	public void tick() {
 		depth = 1;
+		
+		x++;
+		
 		frames++;
 		if (frames == maxFrames) {
 			frames = 0;
@@ -54,37 +61,7 @@ public class Enemy extends Entity {
 
 		if (World.isFree((int) x, (int) (y + gravity))) {
 			y += gravity;
-		} else {
-
-			if (right == true) {
-				if (World.isFree((int) (x + speed), (int) y)) {
-					x += speed;
-					if (World.isFree((int) (x + 16), (int) (y + 1))) {
-						right = false;
-						left = true;
-					}
-				} else {
-					right = false;
-					left = true;
-
-				}
-
-			} else if (left == true) {
-
-				if (World.isFree((int) (x - speed), (int) y)) {
-
-					x -= speed;
-					if (World.isFree((int) (x - 16), (int) (y + 1))) {
-						right = true;
-						left = false;
-					}
-				} else {
-					right = true;
-					left = false;
-
-				}
-			}
-		}
+		} 
 		
 		
 		if (life <= 0) {
@@ -121,8 +98,11 @@ public class Enemy extends Entity {
 	
 	public void reder(Graphics g) {
 
-		g.drawImage(sprites[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
-
+		if(this.right == true) {
+			sprite = enemyRight[index];
+		} else if(this.left == true) {
+			sprite = enemyLeft[index];
+		}
 	}
 
 }

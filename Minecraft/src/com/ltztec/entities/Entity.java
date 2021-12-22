@@ -18,9 +18,9 @@ public class Entity {
 	
 	
 	
-	public static BufferedImage ENEMY1_EN = Game.spritesheet.getSprite(32, 32, 16, 16);
-	public static BufferedImage ENEMY2_EN = Game.spritesheet.getSprite(32, 48, 16, 16);
-	public static BufferedImage COIN_EN = Game.spritesheet.getSprite(0, 64, 16, 16);
+	public static BufferedImage ENEMY1_EN = Game.spritesheet.getSprite(80, 64, 16, 16);
+	public static BufferedImage ENEMY2_EN = Game.spritesheet.getSprite(80, 80, 16, 16);
+	
 	
 	protected double x;
 	protected double y;

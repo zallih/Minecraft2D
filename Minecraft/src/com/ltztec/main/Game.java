@@ -43,7 +43,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static Player player;
 	
 	public static Inventory inventory;
-	
+	public static EnemySpawn enemySpawn;
 	
 	
 	public static int currentEnemy = 0;
@@ -66,6 +66,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		world = new World("/level1.png");
 		ui = new UI();
 		inventory = new Inventory();
+		enemySpawn = new EnemySpawn();
 		
 		entities.add(player);
 
@@ -108,6 +109,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		}
 		ui.tick();
 		inventory.tick();
+		enemySpawn.tick();
 		
 	}
 
@@ -121,7 +123,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		g.setColor(new Color(122, 102, 255));
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
-		/* Renderiza��o do jogo */
 		// Graphics2D g2 = (Graphics2D) g;
 		world.render(g);
 		Collections.sort(entities, Entity.nodeSorter);
