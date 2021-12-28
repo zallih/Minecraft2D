@@ -6,16 +6,24 @@ import java.awt.image.BufferedImage;
 
 import com.ltztec.main.Game;
 import com.ltztec.main.Sound;
+import com.ltztec.world.Camera;
+import com.ltztec.world.FloorTile;
+import com.ltztec.world.Tile;
+import com.ltztec.world.WallTile;
 import com.ltztec.world.World;
+
 
 public class Enemy extends Entity {
 
 	private double speed = 0.8;
 
-	public boolean right = true, left = false;;
+	public boolean right = true, left = false;
+	public int right_dir = 1, left_dir = -1;
+	public int dir = right_dir;
 
 	private int maskx = 2, masky = 2, maskw = 16, maskh = 16;
-	public static int frames = 0, maxFrames = 8, index = 0, maxIndex = 3;
+	
+	public static int frames = 0, maxFrames = 10, index = 0, maxIndex = 3;
 	public static BufferedImage[] enemyLeft;
 	public static BufferedImage[] enemyRight;
 	
@@ -28,26 +36,25 @@ public class Enemy extends Entity {
 
 
 
-	public Enemy(double x, double y, int width, int height, double speed) {
-        super(x, y, width, height, speed, null);
+	public Enemy(double x, double y, int width, int height, double speed ) {
+		super(x, y, width, height, speed, null);
 
-        enemyLeft = new BufferedImage[4];
-        enemyRight = new BufferedImage[4];
-
-        for (int i = 0; i < 4; i++) {
-            enemyLeft[i] = Game.spritesheet.getSprite(32 + (i * 16), 32, 16, 16);
-        }
-
-        for (int i = 0; i < 4; i++) {
-            enemyRight[i] = Game.spritesheet.getSprite(32 + (i * 16), 32, 16, 16);
-        }
-
-}
+		enemyLeft = new BufferedImage[4];
+		enemyRight = new BufferedImage[4];
+		
+		
+		for (int i = 0; i < 4; i++) {
+			enemyLeft[i] = Game.spritesheet.getSprite(80 + (i * 16), 80, 16, 16);
+		}
+		
+		for (int i = 0; i < 4; i++) {
+			enemyRight[i] = Game.spritesheet.getSprite(80 + (i * 16), 64, 16, 16);
+		}
+		
+	}
 
 	public void tick() {
 		depth = 1;
-		
-		x++;
 		
 		frames++;
 		if (frames == maxFrames) {
@@ -78,6 +85,35 @@ public class Enemy extends Entity {
 			}
 		}
 		
+		if(dir == right_dir) {
+			if(World.isFree( (int)(x+speed), (int)y)) {
+				x+=speed;
+			}else {
+				
+				int xnext = (int)((x+speed)/16)+1;
+				int ynext = (int)(y/16);
+		
+				if(World.tiles[xnext+ynext*World.WIDTH] instanceof WallTile && World.tiles[xnext+ynext*World.WIDTH].solid == false) {
+					World.tiles[xnext+ynext*World.WIDTH] = new FloorTile((xnext)*16, ynext*16, Tile.TILE_CEU);
+				}				
+				dir = left_dir;
+			}
+		}else if(dir == left_dir) {
+			if(World.isFree( (int)(x-speed), (int)y)) {
+				x-=speed;
+			}else {
+				
+				int xnext = (int)((x-speed)/16);
+				int ynext = (int)(y / 16);
+		
+				if(World.tiles[xnext+ynext*World.WIDTH] instanceof WallTile && World.tiles[xnext+ynext*World.WIDTH].solid == false) {
+					World.tiles[xnext+ynext*World.WIDTH] = new FloorTile((xnext)*16, ynext*16, Tile.TILE_CEU);
+				}
+				
+				dir = right_dir;
+			}
+		}
+		
 	}
 
 	
@@ -96,12 +132,12 @@ public class Enemy extends Entity {
 
 
 	
-	public void reder(Graphics g) {
+	public void render(Graphics g) {
 
-		if(this.right == true) {
-			sprite = enemyRight[index];
-		} else if(this.left == true) {
-			sprite = enemyLeft[index];
+		if(dir == right_dir) {
+			g.drawImage(enemyRight[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
+		} else if(dir == left_dir) {
+			g.drawImage(enemyLeft[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 		}
 	}
 

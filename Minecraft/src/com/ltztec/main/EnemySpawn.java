@@ -4,7 +4,7 @@ import com.ltztec.entities.Enemy;
 
 public class EnemySpawn {
 
-	public int interval = 60*5;
+	public int interval = 60*15;
 	public int curTime = 0;
 	
 	public void tick() {
