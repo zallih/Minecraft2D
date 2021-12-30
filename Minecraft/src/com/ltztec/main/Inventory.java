@@ -57,12 +57,12 @@ public class Inventory {
 					World.tiles[tilex+tiley*World.WIDTH] = new WallTile(tilex*16, tiley*16, Tile.TILE_PEDRA);
 	
 				}else if(items[selected] == "delete") {
-					World.tiles[tilex+tiley*World.WIDTH] = new FloorTile(tilex*16, tiley*16, Tile.DELETE);
+					World.tiles[tilex+tiley*World.WIDTH] = new FloorTile(tilex*16, tiley*16, Tile.TILE_CEU);
 	
 				}
 				
 				if(World.isFree(Game.player.getX(), Game.player.getY()) == false) {
-					World.tiles[tilex+tiley*World.WIDTH] = new FloorTile(tilex*16, tiley*16, Tile.DELETE);
+					World.tiles[tilex+tiley*World.WIDTH] = new FloorTile(tilex*16, tiley*16, Tile.TILE_CEU);
 				}
 				
 			}

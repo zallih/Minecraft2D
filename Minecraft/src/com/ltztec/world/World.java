@@ -10,6 +10,9 @@ public class World {
 	public static Tile[] tiles;
 	public static int WIDTH, HEIGHT;
 	public static final int TILE_SIZE = 16;
+	
+	public static int day = 0, night = 1;
+	public static int cycle = 1;
 
 	public World(String path) {
 
@@ -78,6 +81,8 @@ public class World {
 		System.exit(2);
 		return;
 	}
+	
+
 
 	public void render(Graphics g) {
 		int xstart = Camera.x >> 4;

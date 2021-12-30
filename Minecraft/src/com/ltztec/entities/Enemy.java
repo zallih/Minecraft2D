@@ -1,5 +1,6 @@
 package com.ltztec.entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -30,7 +31,10 @@ public class Enemy extends Entity {
 
 	private double gravity = 1.2;
 
-	public int life = 4;
+	public double life = 50;
+	public double maxLife = 50;
+	
+	
 	public boolean isDamage = false;
 	private int damageFrames = 0;
 
@@ -139,6 +143,12 @@ public class Enemy extends Entity {
 		} else if(dir == left_dir) {
 			g.drawImage(enemyLeft[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 		}
+		
+		g.setColor(Color.red);
+		g.fillRect(this.getX() - Camera.x, this.getY()- Camera.y -5, 12, 3);
+		
+		g.setColor(Color.green);
+		g.fillRect(this.getX()- Camera.x, this.getY() - Camera.y - 5, (int)((life/maxLife) * 12), 3);
 	}
 
 }

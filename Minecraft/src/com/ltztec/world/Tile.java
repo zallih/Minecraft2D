@@ -9,12 +9,14 @@ import com.ltztec.main.Game;
 public class Tile {
 	
 	public static BufferedImage TILE_CEU = Game.spritesheet.getSprite(0,0,16,16);
+	public static BufferedImage TILE_CEU_NOITE = Game.spritesheet.getSprite(16,32,16,16);
+	
 	public static BufferedImage TILE_GRAMA = Game.spritesheet.getSprite(16,0,16,16);
 	public static BufferedImage TILE_TERRA = Game.spritesheet.getSprite(16,16,16,16);
 	public static BufferedImage TILE_PEDRA = Game.spritesheet.getSprite(0,16,16,16);
 	public static BufferedImage TILE_AREIA = Game.spritesheet.getSprite(0,32,16,16);
 	public static BufferedImage TILE_DELETE = Game.spritesheet.getSprite(0,48,16,16);
-	public static BufferedImage DELETE = Game.spritesheet.getSprite(16,32,16,16);
+	
 	
 	public static BufferedImage SOLID = Game.spritesheet.getSprite(16,48,16,16);
 	
@@ -23,7 +25,7 @@ public class Tile {
 	public boolean solid = false;
 
 	private BufferedImage sprite;
-	private int x,y;
+	protected int x,y;
 	
 	public Tile(int x,int y,BufferedImage sprite){
 		this.x = x;

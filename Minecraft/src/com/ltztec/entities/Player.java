@@ -32,8 +32,19 @@ public class Player extends Entity {
 	private BufferedImage[] leftPlayer;
 	private BufferedImage idlePlayer;
 
+	public BufferedImage attack_right;
+	public BufferedImage attack_left;
+
+	public boolean attack = false;
+	public boolean isAttacking = false;
+	public int attackFrames = 0;
+	public int attackMaxFrames = 10;
+
 	public Player(int x, int y, int width, int height, double speed, BufferedImage sprite) {
 		super(x, y, width, height, speed, sprite);
+
+		attack_right = Game.spritesheet.getSprite(32, 0, 16, 16);
+		attack_left = Game.spritesheet.getSprite(32, 16, 16, 16);
 
 		rightPlayer = new BufferedImage[4];
 		leftPlayer = new BufferedImage[4];
@@ -107,22 +118,70 @@ public class Player extends Entity {
 				jumpFrames = 0;
 			}
 		}
-		
-		if(life<=0) {
+
+		if (attack == true) {
+			if (isAttacking == false) {
+				attack = false;
+				isAttacking = true;
+			}
+		}
+
+		if (isAttacking == true) {
+			attackFrames++;
+			if (attackFrames == attackMaxFrames) {
+				isAttacking = false;
+				attackFrames = 0;
+			}
+		}
+
+		if (life <= 0) {
 			life = 0;
 			World.restartGame();
 		}
 
+		collisionEnemy();
+		
+	}
+
+	public void collisionEnemy() {
+		for (int i = 0; i < Game.entities.size(); i++) {
+			Entity e = Game.entities.get(i);
+			if (e instanceof Enemy) {
+				if (Entity.rand.nextInt(100) < 30) {
+					if (Entity.isColidding(this, e)) {
+						life-=0.3;
+						
+						if(isAttacking == true) {
+							((Enemy) e).life--;
+						}
+					}
+					
+				}
+			}
+		}
 	}
 
 	public void render(Graphics g) {
 
 		if (dir == right_dir) {
 			g.drawImage(rightPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
+
+			if (isAttacking) {
+				g.drawImage(attack_right, this.getX() - Camera.x + 15, this.getY() - Camera.y, null);
+			}
+
 		} else if (dir == left_dir) {
 			g.drawImage(leftPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
+
+			if (isAttacking) {
+				g.drawImage(attack_left, this.getX() - Camera.x - 15, this.getY() - Camera.y, null);
+			}
 		} else if (dir == idle) {
 			g.drawImage(idlePlayer, this.getX() - Camera.x, this.getY() - Camera.y, null);
+
+			if (isAttacking) {
+				g.drawImage(attack_right, this.getX() - Camera.x + 15, this.getY() - Camera.y, null);
+			}
 		}
 
 	}

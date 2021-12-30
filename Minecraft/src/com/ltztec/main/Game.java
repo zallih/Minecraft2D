@@ -111,6 +111,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		inventory.tick();
 		enemySpawn.tick();
 		
+		
 	}
 
 	public void render() {
@@ -182,6 +183,10 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			player.jump = true;
+		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_W) {
+			player.attack = true;
 		}
 	}
 

@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import com.ltztec.main.Game;
+import com.ltztec.world.World;
 
 
 
@@ -25,12 +26,21 @@ public class UI {
 			if(seconds == 60) {
 				seconds = 0;
 				minutes++;
+				if(minutes % 2 == 0) {
+					World.cycle++;
+					
+					if(World.cycle > 1) {
+						World.cycle = 0;
+					}
+				}
 				if(minutes == 60) {
 					minutes = 0;
 					hours++;
 				}
 			}
 		}
+		
+		
 		
 		
 	}
