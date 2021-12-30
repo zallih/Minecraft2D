@@ -2,7 +2,7 @@
 
 
 
-<p align="middle">•Em andamento•</p>
+<p align="middle">•Completo•</p>
 
 <img align="right" alt="zallih" width="150" src="https://media.discordapp.net/attachments/783761333358166056/872618413040730133/WhatsApp_Image_2021-08-04_at_19.42.37.jpeg?width=370&height=370">
   <br><br>
@@ -47,4 +47,4 @@ Minecraft é um dos maiores jogos da última década. O fenômeno independente t
 </div>
 
   <img align="right" alt="zallih" width="120" src="https://cdn.discordapp.com/attachments/882354770709479427/885547375156944906/my-octocat-1631200526625.png">
- <p align="middle">  Esse jogo possui o algoritimo *A</p>
+ <p align="middle">  Esse jogo não possui o algoritimo *A</p>
