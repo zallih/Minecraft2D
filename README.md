@@ -30,9 +30,15 @@ Minecraft é um dos maiores jogos da última década. O fenômeno independente t
   Criando Minecraft com minha própria engine!
    <br><br>
 
-  Para jogar baixe o aquivivo e execute - <a href="#">Clique aqui </a>
+  Para jogar baixe um dos arquivos:
+  
+  Para baixar o arquivo jar - <a href="https://github.com/zallih/Minecraft2D/blob/main/Minecraft.jar?raw=true">Clique aqui</a>
+  
+  
+  Para baixar o arquivo exe - <a href="https://github.com/zallih/Minecraft2D/blob/main/Minecraft.exe?raw=true">Clique aqui</a>
+  
   <br>
-  OBS - Pode aparecer que irá danificar seu aprelho, porem é completamente seguro! Caso queira conferir o código fonte <a href="#"> Clique aqui </a>
+  OBS - Pode aparecer que irá danificar seu aprelho, porem é completamente seguro! Caso queira conferir o código fonte <a href="https://github.com/zallih/Minecraft2D/tree/main/Minecraft"> Clique aqui </a>
 
   <h3>Controles:</h3>
   
